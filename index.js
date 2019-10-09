@@ -1,7 +1,13 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const process= require('.env');
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
+// import routes
+const postRoute = require('./routes/posts');
+app.use('/posts', postRoute);
 
 // routes
 app.get('/', (req, res)=>{
@@ -9,7 +15,7 @@ app.get('/', (req, res)=>{
 })
 // connect to db
 mongoose.connect(
-    process.env.DB_CONNECTION,
+   "mongodb://api_book:trinhvanvinh018@ds233198.mlab.com:33198/resapi_book",
 { useNewUrlParser: true },
 ()=>{
     console.log('connected db');
